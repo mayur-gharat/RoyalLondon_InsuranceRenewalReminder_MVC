@@ -7,7 +7,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Content/bootstrap-ie8")
     @Scripts.Render("~/Content/html5shiv@3.7.3")
-    @*@Scripts.Render("~/Content/bootstrap-ie9")*@
+    @Scripts.Render("~/Content/bootstrap-ie9")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/bootstrap")
@@ -23,7 +23,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Royal London", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
         </footer>
     </div>
 
