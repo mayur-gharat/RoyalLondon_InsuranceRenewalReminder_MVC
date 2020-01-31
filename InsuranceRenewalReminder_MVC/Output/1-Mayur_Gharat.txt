@@ -1,4 +1,4 @@
-31/01/2020
+﻿01/02/2020
 
 FAO : Mr. Mayur Gharat
 
@@ -8,15 +8,15 @@ Dear Mr. Gharat
 
 We hearby invite you to renew your insurance policy, subject to the following terms.
 
-Your chosen insurance product is My New Insurance.
+Your chosen insurance product is Standard Cover.
 
-The amount payable to you in the event of valid claim would be $ 200.
+The amount payable to you in the event of valid claim would be £123456.
 
-Your annual premium would be $88.
+Your annual premium would be £123.45.
 
-If you choose to pay by Direct Debit, we will add a credit charge of $4.4, bringing the total to $92.4. This is payable by  an initial payment of $7.7 followed by 11 payments of $7.7 each.
+If you choose to pay by Direct Debit, we will add a credit charge of £6.17, bringing the total to £129.62. This is payable by  an initial payment of £10.82 followed by 11 payments of £10.8 each.
 
-Please get in touch with us to arrange your renewal by visiting https://www.regallutoncodingtest.co.uk/ewnew or calling us on 01625 123456
+Please get in touch with us to arrange your renewal by visiting https://www.regallutoncodingtest.co.uk/Renew or calling us on 01625 123456
 
 Kind Regards,
 Regal Luton 
