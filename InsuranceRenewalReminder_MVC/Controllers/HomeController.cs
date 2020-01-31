@@ -5,6 +5,8 @@ using System;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.IO;  
+
 
 namespace InsuranceRenewalReminder_MVC.Controllers
 {
@@ -23,11 +25,12 @@ namespace InsuranceRenewalReminder_MVC.Controllers
             {
                 if (flupload != null && flupload.ContentLength > 0)
                 {
-                    String FilePath = Server.MapPath(WebConfigurationManager.AppSettings["InputFilePath"] + "\\" + flupload.FileName);
+                    //Evaluate Input file path
+                    string FileName = Path.GetFileName(flupload.FileName);
+                    string FilePath = Server.MapPath(WebConfigurationManager.AppSettings["InputFilePath"] + "\\" + FileName);
 
                     //Upload input file
                     flupload.SaveAs(FilePath);
-                    ViewBag.Message = "Please select appropreate Input file.";
 
                     //Generate Files
                     System.IO.FileInfo InputFile = new System.IO.FileInfo(FilePath);
@@ -65,6 +68,11 @@ namespace InsuranceRenewalReminder_MVC.Controllers
                         //Delete uploaded file after finish
                         InputFile.Delete();
                     }
+                    else
+                    {
+                        ViewBag.Message = "Error while uploading file, Please select appropreate Input file.";
+                        ViewBag.ResponseCode = -1;
+                    }
                 }
                 else
                 {
@@ -75,6 +83,8 @@ namespace InsuranceRenewalReminder_MVC.Controllers
             catch (Exception ex)
             {
                 Logger.LogException("Index::[HttpPost]", ex);
+                ViewBag.Message = "Error while creating output file!";
+                ViewBag.ResponseCode = -1;
             }
             
             return View();
