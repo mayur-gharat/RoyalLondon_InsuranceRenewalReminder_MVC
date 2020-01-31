@@ -1,0 +1,84 @@
+﻿using EventLogHandler;
+using InsuranceRenewalReminder;
+using InsuranceRenewalTypes;
+using System;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Mvc;
+
+namespace InsuranceRenewalReminder_MVC.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(HttpPostedFileBase flupload)
+        {
+            EventLogger Logger = new EventLogger();
+            try
+            {
+                if (flupload != null && flupload.ContentLength > 0)
+                {
+                    String FilePath = Server.MapPath(WebConfigurationManager.AppSettings["InputFilePath"] + "\\" + flupload.FileName);
+
+                    //Upload input file
+                    flupload.SaveAs(FilePath);
+                    ViewBag.Message = "Please select appropreate Input file.";
+
+                    //Generate Files
+                    System.IO.FileInfo InputFile = new System.IO.FileInfo(FilePath);
+                    if (InputFile.Exists)
+                    {
+                        UIHelper Helper = new UIHelper();
+                        ResponseBase result = Helper.CreateOutputFiles(Helper.GetInputFields(FilePath));
+
+                        //Show notification
+                        if (result == null)
+                        {
+                            ViewBag.Message = "Output file creation failed!!";
+                            ViewBag.ResponseCode = -1;
+                        }
+                        else if (result.ReturnCode < 0)
+                        {
+                            ViewBag.Message = result.ReturnMessage;
+                            ViewBag.ResponseCode = -1;
+                        }
+                        else if (result.ReturnCode > 0)
+                        {
+                            ViewBag.Message = result.ReturnMessage;
+                            ViewBag.ResponseCode = 1;
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Success!! Files generated at " + Server.MapPath(WebConfigurationManager.AppSettings["OutputFilePath"]);
+                            if (!string.IsNullOrWhiteSpace(result.ReturnMessage))
+                            {
+                                ViewBag.Message = ViewBag.Message + Environment.NewLine + result.ReturnMessage;
+                            }
+                            ViewBag.ResponseCode = 0;
+                        }
+
+                        //Delete uploaded file after finish
+                        InputFile.Delete();
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "Please select appropreate Input file.";
+                    ViewBag.ResponseCode = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException("Index::[HttpPost]", ex);
+            }
+            
+            return View();
+        }
+
+    }
+}

@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+@using (Html.BeginForm("index","Home",FormMethod.Post,new { enctype = "multipart/form-data" }))
+{
+
+    @*<%--Header--%>*@
+    <div class="jumbotron">
+        <h1 class="hd1">ROYAL LONDON INSURANCE RENEWAL UTILITY</h1>
+        <p class="p1">This utility will help you create templates for emails to be sent to clients for their Insurance Renewal Reminder.</p>
+    </div>
+
+    @*<%--Main section--%>*@
+    <table class="table">
+        <tr>
+            <td>
+                <input type="file" id="flupload" name="flupload" accept="csv" class="btn btn-info" />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" id="btnSubmit" value="Create Reminders" class="btn btn-info" onclick="return ValidateFileUpload();" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+                @if (@ViewBag.ResponseCode == -1)
+                {
+                    <div id="dvMessage" class="alert-danger">
+                        @Html.Raw(@ViewBag.Message)
+                    </div>
+                }
+                @if (@ViewBag.ResponseCode == 0)
+                {
+                    <div id="dvMessage" class="alert-success">
+                        @Html.Raw(@ViewBag.Message)
+                    </div>
+                }
+                @if (@ViewBag.ResponseCode == 1)
+                {
+                    <div id="dvMessage" class="alert-warning">
+                        @Html.Raw(@ViewBag.Message)
+                    </div>
+                }
+            </td>
+        </tr>
+    </table>
+}
+
+
+
+
