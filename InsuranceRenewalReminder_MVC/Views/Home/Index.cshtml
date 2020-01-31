@@ -29,8 +29,7 @@
         </tr>
         <tr>
             <td>
-                
-                @if (@ViewBag.ResponseCode == -1)
+                @if (@ViewBag.ResponseCode < 0)
                 {
                     <div id="dvMessage" class="alert-danger">
                         @Html.Raw(@ViewBag.Message)
@@ -42,7 +41,7 @@
                         @Html.Raw(@ViewBag.Message)
                     </div>
                 }
-                @if (@ViewBag.ResponseCode == 1)
+                @if (@ViewBag.ResponseCode > 0)
                 {
                     <div id="dvMessage" class="alert-warning">
                         @Html.Raw(@ViewBag.Message)
