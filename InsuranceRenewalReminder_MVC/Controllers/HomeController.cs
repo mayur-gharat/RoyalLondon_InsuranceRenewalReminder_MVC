@@ -60,7 +60,7 @@ namespace InsuranceRenewalReminder_MVC.Controllers
                             ViewBag.Message = "Success!! Files generated at " + Server.MapPath(WebConfigurationManager.AppSettings["OutputFilePath"]);
                             if (!string.IsNullOrWhiteSpace(result.ReturnMessage))
                             {
-                                ViewBag.Message = ViewBag.Message + Environment.NewLine + result.ReturnMessage;
+                                ViewBag.Message = ViewBag.Message + "<br/>" + result.ReturnMessage;
                             }
                             ViewBag.ResponseCode = 0;
                         }
